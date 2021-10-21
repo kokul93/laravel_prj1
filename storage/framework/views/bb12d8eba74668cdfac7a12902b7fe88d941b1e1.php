@@ -5,7 +5,20 @@
         <button type="button" class="btn btn-outline-info">Profile</button>
         </a>
     <?php endif; ?>
-
+    <div class="row">
+        <div class="col">
+            test1
+        </div>
+        <div class="col">
+            test2
+        </div>
+        <div class="col">
+            test3
+        </div>
+        <div class="col">
+            test4
+        </div>
+    </div>
     <div class="row">
         <div class="col-3 p-5">
             <img src="https://i.pinimg.com/550x/f0/a7/0f/f0a70fce4bb761dbb403f0d18e8f9132.jpg" style="height:120px;" class="rounded-circle">

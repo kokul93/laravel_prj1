@@ -22,7 +22,7 @@ class MainController extends Controller
 
     public function index(){
         
-        $posts=Post::paginate(3);
+        $posts=Post::orderBy('created_at','DESC')->paginate(3);
         return view('main',['posts'=>$posts]);
 
     }
