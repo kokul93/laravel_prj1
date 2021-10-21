@@ -13,7 +13,7 @@
                     <label for="content" class="col-form-label ">Type Your Post here</label>
             
                         <input id="content" type="text" 
-                        class="form-control @error('content') is-invalid @enderror"
+                        class="form-control "
                         name="content" 
                         value="{{ old('content') }}" r
                         equired autocomplete="content" 
