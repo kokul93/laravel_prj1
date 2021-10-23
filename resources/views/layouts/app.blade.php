@@ -62,7 +62,11 @@
                         @else
                         <div class="d-flex align-items-baseline">                            
                                 <a href="{{url('/profile/'.Auth::user()->id)}}">
+<<<<<<< HEAD
                                 <button type="button" class="btn btn-outline-info">Profile</button>
+=======
+                                    <img src="{{Auth::user()->profile->profileimage()}}" style="height:40px;" class="rounded-circle">
+>>>>>>> dev
                                 </a>
                             
                             <li class="nav-item dropdown">

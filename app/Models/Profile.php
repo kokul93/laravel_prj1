@@ -9,6 +9,17 @@ class Profile extends Model
 {
     protected $guarded =[];
     use HasFactory;
+<<<<<<< HEAD
+=======
+
+    public function profileImage(){
+
+        $imagePath=($this->image)? $this->image : 'profile/34AD2.jpg';
+        return '/storage/'.$imagePath;
+
+    }
+
+>>>>>>> dev
     public function user(){
 
         return $this->belongsTo(User::class);

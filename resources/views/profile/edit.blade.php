@@ -8,6 +8,10 @@
         @method('PATCH')
         @csrf
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
         
         <div class="row">
             <div class="col-8 offset-2">

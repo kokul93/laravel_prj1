@@ -8,6 +8,7 @@
         </a>
     @endcan
     <div class="row">
+<<<<<<< HEAD
         <div class="col">
             test1
         </div>
@@ -24,6 +25,10 @@
     <div class="row">
         <div class="col-3 p-5">
             <img src="https://i.pinimg.com/550x/f0/a7/0f/f0a70fce4bb761dbb403f0d18e8f9132.jpg" style="height:120px;" class="rounded-circle">
+=======
+        <div class="col-3 p-5">
+            <img src="{{$user->profile->profileimage()}}" style="height:120px;" class="rounded-circle">
+>>>>>>> dev
         </div>
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">

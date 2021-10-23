@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+<<<<<<< HEAD
+=======
+use Exception;
+>>>>>>> dev
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 
@@ -39,6 +43,7 @@ class ProfileController extends Controller
     }
 
     public function update(User $user){
+<<<<<<< HEAD
         
         $data=request()->validate([
             'title'=>'required',
@@ -57,13 +62,55 @@ class ProfileController extends Controller
             $data,
             ['image'=>$imagePath]
         ));
+=======
+            
+        $data=request()->validate([
+            'title'=>'required',
+            'image'=>['','image'],
+        ]);  
+        
+        function randomString($n){
+            $char='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $str='';
+            for($i=0;$i<$n;$i++){
+                $index=rand(0,strlen($char)-1);
+                $str.=$char[$index];
+            }
+            return $str;
+        }
+        
+        if(request('image')){
+            $imagePath=request('image')->store('profile/'.$user->id.'/'.randomString(8),'public');
+            $image=Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+            $image->save();
+        };
+        try{
+        //auth()->user()->profile()->update($data);
+        auth()->user()->profile()->update(array_merge(
+            $data,
+            ['image'=>$imagePath]
+        ));
+    }catch(exception $e){
+        dd($e);
+    }
+       
+>>>>>>> dev
         
         /* 'title'=>$data['title'],
             'image'=>$imagePath,
             'description'=>$data['description'],
             'url'=>$data['url'], */
+<<<<<<< HEAD
 
         return redirect('/profile/{auth()->user->id}');
 
     }
+=======
+            
+
+            return redirect('profile/'.auth()->user()->id);
+
+    }
+
+>>>>>>> dev
 }

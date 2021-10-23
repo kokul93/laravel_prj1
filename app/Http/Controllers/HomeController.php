@@ -1,9 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
 
 use Illuminate\Http\Request;
 
+=======
+use App\Models\User;
+
+use Illuminate\Http\Request;
+
+
+>>>>>>> dev
 class HomeController extends Controller
 {
     /**
@@ -23,6 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         return view('home');
+=======
+        return view('home',['user'=>$user]);
+>>>>>>> dev
     }
 }
