@@ -62,7 +62,7 @@
                         <?php else: ?>
                         <div class="d-flex align-items-baseline">                            
                                 <a href="<?php echo e(url('/profile/'.Auth::user()->id)); ?>">
-                                <button type="button" class="btn btn-outline-info">Profile</button>
+                                    <img src="<?php echo e(Auth::user()->profile->profileimage()); ?>" style="height:40px;" class="rounded-circle">
                                 </a>
                             
                             <li class="nav-item dropdown">
