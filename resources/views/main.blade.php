@@ -8,10 +8,16 @@
     <div class="card pb-2 pt-2 pr-1">
 
                 <div class="container align-items-baseline pt-2"> 
-                    <div align="left">
-                    <h4> <a href="{{url('/profile/'.$post->user_id)}} ">{{\App\Models\User::find($post->user_id)->username}}</a></h4>
-                    </div>        
-                    <h3>{{$post->content}}</h3>
+                    <div class="row pl-2 pb-3" align="left">
+            
+                            <img src="{{\App\Models\User::find($post->user_id)->profile->profileimage()}}" style="height:25px;" class="rounded-circle">
+                        
+                            <h5> <a href="{{url('/profile/'.$post->user_id)}} ">{{\App\Models\User::find($post->user_id)->username}}</a></h5>
+                    </div>
+                    <div class="row pl-2 pt-2">
+                        <h3>{{$post->content}}</h3>
+                    </div>
+                    
                 </div>
                 <div align="right" class="pr-2 pb-1">                               
                     Posted on {{$post->created_at}}
@@ -23,8 +29,11 @@
                         <div> 
                             {{$comment->context}} 
                             </div>
-                            <div align="right">
+                            <div class="row pl-3 " align="right">
+                                <div class="tab">
+                                    <img src="{{\App\Models\User::find($comment->user_id)->profile->profileimage()}}" style="height:20px;" class="rounded-circle"> 
                                     <a href="{{url('/profile/'.$comment->user_id)}} ">{{\App\Models\User::find($comment->user_id)->username}}</a> commented on {{$comment->created_at}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +65,7 @@
     </div>
     
 
-    @endforeach
+@endforeach
  
     <nav aria-label="Page navigation example">
         <ul class="pagination">
