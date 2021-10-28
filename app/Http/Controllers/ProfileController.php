@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+
 use Exception;
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
+use App\Models\Post;
+use App\Models\User;
 
 
 class ProfileController extends Controller
@@ -28,8 +30,14 @@ class ProfileController extends Controller
      */
     public function index(User $user){
 
+            //$userPosts=$user->posts;
+            $userPosts=Post::where('user_id','=',$user->id)->paginate(
+                $perPage=3,$columns=['*'],$pageName='posts'
+            );
+            //$userPosts=Post::find($user->id)->orderBy('created_at','DESC')->paginate(5);
 
-        return view('profile/index',compact('user'));
+
+        return view('profile/index',compact('user'),['userPosts'=>$userPosts]);
 
     }
 

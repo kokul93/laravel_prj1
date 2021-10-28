@@ -29,8 +29,8 @@
                 <div class="font-weight-bold"><a href="#"><?php echo e($user->profile->url??"N/A"); ?></a></div>
                 </div>
         </div>
-        <?php $__currentLoopData = $user->posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="card pb-2 pt-2 pr-1">
+        <?php $__currentLoopData = $userPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="card pb-2 pt-2">
             <div class="container justify-content-between align-items-baseline">         
                 <h3><?php echo e($post->content); ?></h3>
             </div>
@@ -40,11 +40,12 @@
             </div>
             <?php if($post->comments->count()!=0): ?>
                 <?php $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="card justify-content-between align-items-baseline">         
+                <div class="card justify-content-between align-items-baseline pt-1 pb-2">         
                    <div> 
                        <?php echo e($comment->context); ?> 
                     </div>
-                    <div align="right">
+                    <div class="pl-0.5"align="right">
+                        <img src="<?php echo e(\App\Models\User::find($comment->user_id)->profile->profileimage()); ?>" style="height:20px;" class="rounded-circle">
                             <a href="<?php echo e(url('/profile/'.$comment->user_id)); ?> "><?php echo e(\App\Models\User::find($comment->user_id)->username); ?></a> commented on <?php echo e($comment->created_at); ?>
 
                     </div>
@@ -87,6 +88,17 @@ unset($__errorArgs, $__bag); ?>
         </div>
         <br>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <?php echo e($userPosts->links()); ?>
+
+            </ul>
+            <style>
+                .w-5{
+                    display: none;
+                }
+            </style>
+        </nav>
         <?php endif; ?>       
     </div>    
 

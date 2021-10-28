@@ -31,8 +31,8 @@
                 <div class="font-weight-bold"><a href="#">{{$user->profile->url??"N/A"}}</a></div>
                 </div>
         </div>
-        @foreach ($user->posts as $post)
-        <div class="card pb-2 pt-2 pr-1">
+        @foreach ($userPosts as $post)
+        <div class="card pb-2 pt-2">
             <div class="container justify-content-between align-items-baseline">         
                 <h3>{{$post->content}}</h3>
             </div>
@@ -41,11 +41,12 @@
             </div>
             @if ($post->comments->count()!=0)
                 @foreach ($post->comments as $comment  )
-                <div class="card justify-content-between align-items-baseline">         
+                <div class="card justify-content-between align-items-baseline pt-1 pb-2">         
                    <div> 
                        {{$comment->context}} 
                     </div>
-                    <div align="right">
+                    <div class="pl-0.5"align="right">
+                        <img src="{{\App\Models\User::find($comment->user_id)->profile->profileimage()}}" style="height:20px;" class="rounded-circle">
                             <a href="{{url('/profile/'.$comment->user_id)}} ">{{\App\Models\User::find($comment->user_id)->username}}</a> commented on {{$comment->created_at}}
                     </div>
                 </div>
@@ -73,6 +74,16 @@
         </div>
         <br>
         @endforeach
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{$userPosts->links()}}
+            </ul>
+            <style>
+                .w-5{
+                    display: none;
+                }
+            </style>
+        </nav>
         @endif       
     </div>    
 
