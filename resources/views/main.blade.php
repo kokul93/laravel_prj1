@@ -4,6 +4,7 @@
 
 
 <div class="container">
+
 @foreach ($posts as $post)
     <div class="card pb-2 pt-2 pr-1">
 

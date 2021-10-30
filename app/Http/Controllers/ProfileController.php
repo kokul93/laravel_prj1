@@ -31,7 +31,7 @@ class ProfileController extends Controller
     public function index(User $user){
 
             //$userPosts=$user->posts;
-            $userPosts=Post::where('user_id','=',$user->id)->paginate(
+            $userPosts=Post::where('user_id','=',$user->id)->orderBy('created_at','DESC')->paginate(
                 $perPage=3,$columns=['*'],$pageName='posts'
             );
             //$userPosts=Post::find($user->id)->orderBy('created_at','DESC')->paginate(5);
