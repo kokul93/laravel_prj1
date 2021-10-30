@@ -2,6 +2,7 @@
 
 
 <div class="container">
+
 <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="card pb-2 pt-2 pr-1">
 

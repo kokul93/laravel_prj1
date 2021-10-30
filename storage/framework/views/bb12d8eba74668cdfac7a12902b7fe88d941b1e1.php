@@ -1,20 +1,12 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view',$user->profile)): ?>
-        <a href="<?php echo e(url('/profile/'.Auth::user()->id)); ?>">
-        <button type="button" class="btn btn-outline-info">Profile</button>
-        </a>
-    <?php endif; ?>
     <div class="row">
         <div class="col-3 p-5">
             <img src="<?php echo e($user->profile->profileimage()); ?>" style="height:120px;" class="rounded-circle">
         </div>
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">
-                    <h1><?php echo e($user->username); ?></h1>
-            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$user->profile)): ?>
-                    <a href="/p/create"><strong>Add New Post</strong></a>
-            <?php endif; ?>                   
+                    <h1><?php echo e($user->username); ?></h1>                  
             </div>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$user->profile)): ?>
             <a href="<?php echo e($user->id); ?>/edit"><strong>Edit Profile</strong></a>
@@ -29,7 +21,48 @@
                 <div class="font-weight-bold"><a href="#"><?php echo e($user->profile->url??"N/A"); ?></a></div>
                 </div>
         </div>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$user->profile)): ?>
+            <div class="container pl-2 pt-5 pb-3">
+                <form action="/p" enctype="multipart/form-data" method="post" >
+                    <?php echo csrf_field(); ?>
+                            <!-- <div class="col-8 offset-2"> -->     
+                        <div class="form-group pl-1 row">
+                            <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
+                    
+                                <input id="content" type="text" 
+                                class="form-control "
+                                name="content" 
+                                value="<?php echo e(old('content')); ?>" r
+                                equired autocomplete="content" 
+                                autofocus placeholder="Enter What you feel today!!!">
+                    
+                                <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        <!-- </div> -->
+                        </div>
+                        
+                        <div class="row">
+                            <!-- <div class="col-8 offset-2"> -->
+                                <div class="form-group pl-4 row">
+                                    <button class="btn btn-primary">Create Post</button>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </form>
+            </div>
+        <?php endif; ?>
         <?php $__currentLoopData = $userPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        
         <div class="card pb-2 pt-2">
             <div class="container justify-content-between align-items-baseline">         
                 <h3><?php echo e($post->content); ?></h3>

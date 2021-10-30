@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container">
-    @can('view',$user->profile)
-        <a href="{{url('/profile/'.Auth::user()->id)}}">
-        <button type="button" class="btn btn-outline-info">Profile</button>
-        </a>
-    @endcan
     <div class="row">
 <<<<<<< HEAD
         <div class="col">
@@ -32,10 +27,7 @@
         </div>
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">
-                    <h1>{{ $user->username }}</h1>
-            @can('update',$user->profile)
-                    <a href="/p/create"><strong>Add New Post</strong></a>
-            @endcan                   
+                    <h1>{{ $user->username }}</h1>                  
             </div>
             @can('update',$user->profile)
             <a href="{{$user->id}}/edit"><strong>Edit Profile</strong></a>
@@ -50,7 +42,41 @@
                 <div class="font-weight-bold"><a href="#">{{$user->profile->url??"N/A"}}</a></div>
                 </div>
         </div>
+        @can('update',$user->profile)
+            <div class="container pl-2 pt-5 pb-3">
+                <form action="/p" enctype="multipart/form-data" method="post" >
+                    @csrf
+                            <!-- <div class="col-8 offset-2"> -->     
+                        <div class="form-group pl-1 row">
+                            <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
+                    
+                                <input id="content" type="text" 
+                                class="form-control "
+                                name="content" 
+                                value="{{ old('content') }}" r
+                                equired autocomplete="content" 
+                                autofocus placeholder="Enter What you feel today!!!">
+                    
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        <!-- </div> -->
+                        </div>
+                        
+                        <div class="row">
+                            <!-- <div class="col-8 offset-2"> -->
+                                <div class="form-group pl-4 row">
+                                    <button class="btn btn-primary">Create Post</button>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </form>
+            </div>
+        @endcan
         @foreach ($userPosts as $post)
+        
         <div class="card pb-2 pt-2">
             <div class="container justify-content-between align-items-baseline">         
                 <h3>{{$post->content}}</h3>
