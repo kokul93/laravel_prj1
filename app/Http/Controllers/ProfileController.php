@@ -3,15 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-use App\Models\User;
-<<<<<<< HEAD
-=======
-=======
 
->>>>>>> dev
 use Exception;
->>>>>>> dev
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 use App\Models\Post;
@@ -55,26 +48,6 @@ class ProfileController extends Controller
     }
 
     public function update(User $user){
-<<<<<<< HEAD
-        
-        $data=request()->validate([
-            'title'=>'required',
-            'image'=>'image',
-            'url'=>'url',
-            'image'=>'',
-        ]);
-        dd($data);
-        if(request('image')){
-            $imagePath=request('image')->store('profiles/{auth()->user->id}','public');
-            $image=Image::make(public_path("storage/{$imagePath}"))->fit(1000,1000);
-            $image->save();
-        }
-
-        auth()->user->profile()->update(array_merge(
-            $data,
-            ['image'=>$imagePath]
-        ));
-=======
             
         $data=request()->validate([
             'title'=>'required',
@@ -106,23 +79,15 @@ class ProfileController extends Controller
         dd($e);
     }
        
->>>>>>> dev
         
         /* 'title'=>$data['title'],
             'image'=>$imagePath,
             'description'=>$data['description'],
             'url'=>$data['url'], */
-<<<<<<< HEAD
-
-        return redirect('/profile/{auth()->user->id}');
-
-    }
-=======
             
 
             return redirect('profile/'.auth()->user()->id);
 
     }
 
->>>>>>> dev
 }

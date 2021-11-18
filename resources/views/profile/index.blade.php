@@ -3,27 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-<<<<<<< HEAD
-        <div class="col">
-            test1
-        </div>
-        <div class="col">
-            test2
-        </div>
-        <div class="col">
-            test3
-        </div>
-        <div class="col">
-            test4
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3 p-5">
-            <img src="https://i.pinimg.com/550x/f0/a7/0f/f0a70fce4bb761dbb403f0d18e8f9132.jpg" style="height:120px;" class="rounded-circle">
-=======
         <div class="col-3 p-5">
             <img src="{{$user->profile->profileimage()}}" style="height:120px;" class="rounded-circle">
->>>>>>> dev
         </div>
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">
@@ -43,36 +24,58 @@
                 </div>
         </div>
         @can('update',$user->profile)
+
             <div class="container pl-2 pt-5 pb-3">
-                <form action="/p" enctype="multipart/form-data" method="post" >
-                    @csrf
-                            <!-- <div class="col-8 offset-2"> -->     
-                        <div class="form-group pl-1 row">
-                            <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
-                    
-                                <input id="content" type="text" 
-                                class="form-control "
-                                name="content" 
-                                value="{{ old('content') }}" r
-                                equired autocomplete="content" 
-                                autofocus placeholder="Enter What you feel today!!!">
-                    
-                                @error('content')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        <!-- </div> -->
-                        </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Create A Post
+                </button>   
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Create A Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/p" enctype="multipart/form-data" method="post" >
+                                @csrf
+                                <!-- <div class="col-8 offset-2"> -->     
+                                <div class="form-group pl-1 row">
+                                <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
                         
-                        <div class="row">
-                            <!-- <div class="col-8 offset-2"> -->
-                                <div class="form-group pl-4 row">
-                                    <button class="btn btn-primary">Create Post</button>
-                                </div>
-                            <!-- </div> -->
+                                    <textarea id="content" type="text" 
+                                    class="form-control "
+                                    name="content" 
+                                    value="{{ old('content') }}" r
+                                    equired autocomplete="content" 
+                                    autofocus placeholder="Enter What you feel today!!!" rows="4">
+                                    </textarea>
+                        
+                                    @error('content')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <!-- </div> -->
+                                    </div>
+                            
+                                    <div class="row">
+                                    <!-- <div class="col-8 offset-2"> -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary">Create Post</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                    
+                                    <!-- </div> -->
+                                    </div>
+                            </form>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
             </div>
         @endcan
         @foreach ($userPosts as $post)

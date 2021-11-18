@@ -9,8 +9,6 @@ class Profile extends Model
 {
     protected $guarded =[];
     use HasFactory;
-<<<<<<< HEAD
-=======
 
     public function profileImage(){
 
@@ -19,7 +17,6 @@ class Profile extends Model
 
     }
 
->>>>>>> dev
     public function user(){
 
         return $this->belongsTo(User::class);

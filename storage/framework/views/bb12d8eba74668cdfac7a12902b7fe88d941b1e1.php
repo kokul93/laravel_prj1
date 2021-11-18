@@ -22,43 +22,65 @@
                 </div>
         </div>
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$user->profile)): ?>
+
             <div class="container pl-2 pt-5 pb-3">
-                <form action="/p" enctype="multipart/form-data" method="post" >
-                    <?php echo csrf_field(); ?>
-                            <!-- <div class="col-8 offset-2"> -->     
-                        <div class="form-group pl-1 row">
-                            <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
-                    
-                                <input id="content" type="text" 
-                                class="form-control "
-                                name="content" 
-                                value="<?php echo e(old('content')); ?>" r
-                                equired autocomplete="content" 
-                                autofocus placeholder="Enter What you feel today!!!">
-                    
-                                <?php $__errorArgs = ['content'];
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Create A Post
+                </button>   
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Create A Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/p" enctype="multipart/form-data" method="post" >
+                                <?php echo csrf_field(); ?>
+                                <!-- <div class="col-8 offset-2"> -->     
+                                <div class="form-group pl-1 row">
+                                <!-- <label for="content" class="col-form-label ">Type Your Post here</label> -->
+                        
+                                    <textarea id="content" type="text" 
+                                    class="form-control "
+                                    name="content" 
+                                    value="<?php echo e(old('content')); ?>" r
+                                    equired autocomplete="content" 
+                                    autofocus placeholder="Enter What you feel today!!!" rows="4">
+                                    </textarea>
+                        
+                                    <?php $__errorArgs = ['content'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong><?php echo e($message); ?></strong>
-                                    </span>
-                                <?php unset($message);
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                        <!-- </div> -->
+                                    <!-- </div> -->
+                                    </div>
+                            
+                                    <div class="row">
+                                    <!-- <div class="col-8 offset-2"> -->
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary">Create Post</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                    
+                                    <!-- </div> -->
+                                    </div>
+                            </form>
+                            </div>
                         </div>
-                        
-                        <div class="row">
-                            <!-- <div class="col-8 offset-2"> -->
-                                <div class="form-group pl-4 row">
-                                    <button class="btn btn-primary">Create Post</button>
-                                </div>
-                            <!-- </div> -->
-                        </div>
-                    </form>
+                    </div>
+                </div>
             </div>
         <?php endif; ?>
         <?php $__currentLoopData = $userPosts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
