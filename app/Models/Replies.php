@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Replies extends Model
 {
-
     protected $guarded=[];
     
     use HasFactory;
@@ -19,11 +18,6 @@ class Comment extends Model
 
     public function post(){
 
-        return $this->belongsTo(Post::class);
-    }
-
-    public function replies(){
-
-        return $this->hasMany(Replies::class)->orderBy('created_at');
+        return $this->belongsTo(Comment::class);
     }
 }
