@@ -64,10 +64,17 @@
                             
                                     <div class="row">
                                     <!-- <div class="col-8 offset-2"> -->
+<<<<<<< HEAD
                                     <div class="modal-footer">
                                         <button class="btn btn-primary">Create Post</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
+=======
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary">Create Post</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+>>>>>>> dev
                                     
                                     <!-- </div> -->
                                     </div>
@@ -89,7 +96,7 @@
             </div>
             @if ($post->comments->count()!=0)
                 @foreach ($post->comments as $comment  )
-                <div class="card justify-content-between align-items-baseline pt-1 pb-2">         
+                <div class="card justify-content-between align-items-baseline pt-1 pb-4">         
                    <div> 
                        {{$comment->context}} 
                     </div>
@@ -97,29 +104,61 @@
                         <img src="{{\App\Models\User::find($comment->user_id)->profile->profileimage()}}" style="height:20px;" class="rounded-circle">
                             <a href="{{url('/profile/'.$comment->user_id)}} ">{{\App\Models\User::find($comment->user_id)->username}}</a> commented on {{$comment->created_at}}
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="pl-4" align="right">
+                            <button type="button" class="btn btn-outline-secondary" >reply</button>
+                        </div>
+                    </div>
                 </div>
                 @endforeach 
                 
             @endif
-            <form action="/cmt/{{$post->id}}" enctype="multipart/form-data" method="post">
-                @csrf
-                <div class="form-group">
-                  <input id="context" type="text" 
-                        class="form-control @error('context') is-invalid @enderror"
-                        name="context" 
-                        value="{{ old('context') }}" r
-                        equired autocomplete="context" 
-                        autofocus style="height:25px;" placeholder="Enter Your Comment">
-            
-                        @error('context')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+            <div class="container pl-2 pt-2 pb-3">
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#commentHere">
+                    Comment Here
+                </button>
+            </div>
+            <div class="modal fade" id="commentHere" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Comment Here</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/cmt/{{$post->id}}" enctype="multipart/form-data" method="post">
+                            @csrf
+                            <div class="form-group">
+                            <textarea id="context" type="text" 
+                                    class="form-control @error('context') is-invalid @enderror"
+                                    name="context" 
+                                    value="{{ old('context') }}" r
+                                    equired autocomplete="context" 
+                                    autofocus placeholder="Enter Your Comment!!!!" rows="4"></textarea>
+                        
+                                    @error('context')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
+                            <div class="row">
+                            <!-- <div class="col-8 offset-2"> -->
+                                <div class="modal-footer">
+                                <button class="btn btn-outline-danger" >Add comment</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            
+                                <!-- </div> -->
+                            </div>
+                            
+                        </form>
+
+                        </div>
+                            </div>
+                        </div>
+                        
                 </div>
-                <button class="btn btn-outline-danger" style="font-size:x-small;">Add comment</button>
-            </form>
-        </div>
         <br>
         @endforeach
         <nav aria-label="Page navigation example">
@@ -136,4 +175,10 @@
     </div>    
 
 </div>
+
+
+
+
+
 @endsection
+
